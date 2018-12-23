@@ -1,0 +1,20 @@
+* Home
+  My attempt at a DAP(Distributed Autonomous Property). 
+
+  The idea is to create a system in which multiple people can live in, own,
+  maintain, and collectively make decisions about a house, building, or peice of
+  property. 
+
+  In this paradigm the dichtomy between renter and landlord is
+  absolved. Instead, the people who currently live in a Home will be slowly
+  buying shares of it from those who previously lived in it. This will ensure
+  that everyone involved with the Home will be invested in its' long term
+  health and will benefit from increasing property values.
+  
+  See spec.org for more specific details.
+* Tech Stack
+  This is the technologies that I'm currently using
+
+  + Blockchain Platform :: Ethereum
+  + Smart Contract Language :: Solidity
+  + Framework :: Truffle
