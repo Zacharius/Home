@@ -12,9 +12,9 @@
   health and will benefit from increasing property values.
   
   See spec.org for more specific details.
-* Tech Stack
-  This is the technologies that I'm currently using
+** Tech Stack
+   This is the technologies that I'm currently using
 
-  + Blockchain Platform :: Ethereum
-  + Smart Contract Language :: Solidity
-  + Framework :: Truffle
+   + Blockchain Platform :: Ethereum
+   + Smart Contract Language :: Solidity
+   + Framework :: Truffle

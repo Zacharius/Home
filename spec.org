@@ -1,139 +1,139 @@
-Home
+* Home
 An ethereum project to create a house that owns itself. Name above is
 placeholder. 
-* initiation
-  A Home is created by creating a Home contract. A Home contract requires the
-  following parameters
-  - A list of starting members, this will include their
-    + Account address
-    + percentage of shares they begin with
-    + member status
-  - The initial valueation of the Home. This will be the sum total of all shares
+** initiation
+   A Home is created by creating a Home contract. A Home contract requires the
+   following parameters
+   - A list of starting members, this will include their
+     + Account address
+     + percentage of shares they begin with
+     + member status
+   - The initial valueation of the Home. This will be the sum total of all shares
 
-    The first vote will be to confirm that the initial valuation is agreed
-    upon. Until members can agree upon the valuation, nothing else can be done.
-* Member types
-  Each member will have several properties associated with their account.
-  - account address
-  - # of shares
-  - status
-    + stakeholders, member, inhabitant, or custodian
-  - % of Home occupied
-    + 0 if non inhabitant
+     The first vote will be to confirm that the initial valuation is agreed
+     upon. Until members can agree upon the valuation, nothing else can be done.
+** Member types
+   Each member will have several properties associated with their account.
+   - account address
+   - # of shares
+   - status
+     + stakeholders, member, inhabitant, or custodian
+   - % of Home occupied
+     + 0 if non inhabitant
       
       
-  The following iis listed in order of exclusivity, so all inhabitants are
-  members, and all members are stakeholders, etc.
+   The following iis listed in order of exclusivity, so all inhabitants are
+   members, and all members are stakeholders, etc.
 
-** The Custodian
-   The custodian will be a singular title whose responsibilities will be the
-   overall upkeep, maintenance, and ordiliness of the house. He will generally
-   be an inhabitant, may or may not be required. He has elevated privledges to
-   to brind in or banish inhabitants. He can also spend money and/or shares on
-   behalf of the house. He will be chosen by a vote of the stakeholders. A
-   similar vote is required to replace him.
+*** The Custodian
+    The custodian will be a singular title whose responsibilities will be the
+    overall upkeep, maintenance, and ordiliness of the house. He will generally
+    be an inhabitant, may or may not be required. He has elevated privledges to
+    to brind in or banish inhabitants. He can also spend money and/or shares on
+    behalf of the house. He will be chosen by a vote of the stakeholders. A
+    similar vote is required to replace him.
 
-   His position will give him some incentives.
-   Possible incentives:
-   - priority in buying/selling shares.
-   - discount in buying shares up to a certain amount
-   - monthly stipend of shares
-   - monthly salary
-** Inhabitants
-   The inhabitants will be members currently living in the Home. living in
-   the Home means that they are required pay Rent. The benefit is that they
-   receive a multiplier to their voting power, 10x or so. This means that during
-   votes, each share of an inhabitants' will given them 10x more voting power
-   than a stakeholder's share.
+    His position will give him some incentives.
+    Possible incentives:
+    - priority in buying/selling shares.
+    - discount in buying shares up to a certain amount
+    - monthly stipend of shares
+    - monthly salary
+*** Inhabitants
+    The inhabitants will be members currently living in the Home. living in
+    the Home means that they are required pay Rent. The benefit is that they
+    receive a multiplier to their voting power, 10x or so. This means that during
+    votes, each share of an inhabitants' will given them 10x more voting power
+    than a stakeholder's share.
    
-   Someone cannot become an inhabitant until they become a stakeholder. How I
-   would imagine the onboarding of a new inhabitant/stakeholder would go is that
-   they buy a small amount of shares before moving in and that fee would be
-   paid as a sort of security deposit. 
-** Members
-   Stakeholders who have the ability to vote and purchase more shares
-** Stakeholders
-   Stakeholders are simply anyone who owns any shares in the Home. 
+    Someone cannot become an inhabitant until they become a stakeholder. How I
+    would imagine the onboarding of a new inhabitant/stakeholder would go is that
+    they buy a small amount of shares before moving in and that fee would be
+    paid as a sort of security deposit. 
+*** Members
+    Stakeholders who have the ability to vote and purchase more shares
+*** Stakeholders
+    Stakeholders are simply anyone who owns any shares in the Home. 
 
-   Simply being a stakeholder does not give you the ability to buy more shares
-   or vote
+    Simply being a stakeholder does not give you the ability to buy more shares
+    or vote
    
-* Shares, Buying, Selling
-  Upon Home creation, a fixed amount of shares will be generated and distributed
-  accoring to the info given. 
+** Shares, Buying, Selling
+   Upon Home creation, a fixed amount of shares will be generated and distributed
+   accoring to the info given. 
 
-  Shares will be priced as their proportional fraction of the total home
-  valuation, how and how often this valuation will occur is a difficult question
-  left unanswered for now
+   Shares will be priced as their proportional fraction of the total home
+   valuation, how and how often this valuation will occur is a difficult question
+   left unanswered for now
 
-  Once a home is created, a marketplace will be established that will allow
-  stakeholders to buy and sell shares amongst each other.
+   Once a home is created, a marketplace will be established that will allow
+   stakeholders to buy and sell shares amongst each other.
 
-  Any stakeholder can put their shares up for sale at any time. 
+   Any stakeholder can put their shares up for sale at any time. 
 
-  Once shares are put up, there will be a period in which only inhabitants can
-  buy those shares, a week or so. 
+   Once shares are put up, there will be a period in which only inhabitants can
+   buy those shares, a week or so. 
 
-  Once that period is up, any member can buy those shares.
+   Once that period is up, any member can buy those shares.
   
-  This marketplace will be closed to stakeholders and all others. 
+   This marketplace will be closed to stakeholders and all others. 
   
-  Currently I think the only path to becoming a member should be to live in the
-  Home for some period of time
+   Currently I think the only path to becoming a member should be to live in the
+   Home for some period of time
      
-  This is to try and keep the stakeholders invested in the long term health of
-  the house, foster a community, and prevent speculation.
+   This is to try and keep the stakeholders invested in the long term health of
+   the house, foster a community, and prevent speculation.
   
-  Stakeholders can also pass their shares on to other stakeholders free of charge,
-  if they so wish
+   Stakeholders can also pass their shares on to other stakeholders free of charge,
+   if they so wish
 
 
-* <<<Rent>>>
-  The Inhabitants of a Home are responsible for paying the cost of a Home's
-  continuing existence. This could include property taxes, maintenance,
-  mortage, custodian salary, etc. The monthly cost will be estimated and split
-  among the inhabitants according to the percent of the home they occupy. 
+** Rent
+   The Inhabitants of a Home are responsible for paying the cost of a Home's
+   continuing existence. This could include property taxes, maintenance,
+   mortage, custodian salary, etc. The monthly cost will be estimated and split
+   among the inhabitants according to the percent of the home they occupy. 
 
-  On top of that there will be a min and max number of shares that each
-  inhabitant must/can buy each month. 
-  These shares will be purchased from one of the following sources, in order of
-  priority:
-  1. shares currently for sell on the marketplace
-  2. shares owned by a stakeholder 
-  3. shares owned by the member for whom the greatest amount of time has past since
-  they lived in the house
+   On top of that there will be a min and max number of shares that each
+   inhabitant must/can buy each month. 
+   These shares will be purchased from one of the following sources, in order of
+   priority:
+   1. shares currently for sell on the marketplace
+   2. shares owned by a stakeholder 
+   3. shares owned by the member for whom the greatest amount of time has past since
+   they lived in the house
    
-  The min number could potentially be 0 but I think it should be greater, to
-  ensure that all inhabitants are at least partially invested in the long term
-  health of the house and to prevent a situation where those with large shares
-  refuse to sell until the housing price goes up, turning the relation into
-  much more of a landlord, renter dicotomy,
+   The min number could potentially be 0 but I think it should be greater, to
+   ensure that all inhabitants are at least partially invested in the long term
+   health of the house and to prevent a situation where those with large shares
+   refuse to sell until the housing price goes up, turning the relation into
+   much more of a landlord, renter dicotomy,
 
    
-* maintenance
-  A monthly amount will be agreed upon, through a vote, to pay in maintenance
-  fees each month. This amount will be stored by the Home for future
-  repairs. This is significant because it is the largest source of Ether that
-  the Home will need to store for a large period of time. 
+** maintenance
+   A monthly amount will be agreed upon, through a vote, to pay in maintenance
+   fees each month. This amount will be stored by the Home for future
+   repairs. This is significant because it is the largest source of Ether that
+   the Home will need to store for a large period of time. 
   
-  A max amount may also be set so that if the specified amount is accumulated,
-  a monthly maintenance fee will not be required until the fund has been
-  depleted below the max amount
+   A max amount may also be set so that if the specified amount is accumulated,
+   a monthly maintenance fee will not be required until the fund has been
+   depleted below the max amount
 
-  If there comes a time more maintenance is needed than is in the fund, then all
-  members will have to give away some amount of shares that will then be given
-  to whomever needs to be paid to perform the maintenance. This person will now
-  be a stakeholder until all their shares are bought
+   If there comes a time more maintenance is needed than is in the fund, then all
+   members will have to give away some amount of shares that will then be given
+   to whomever needs to be paid to perform the maintenance. This person will now
+   be a stakeholder until all their shares are bought
   
   
-  The custodian will be responsible for issuing contracts to perform
-  maintenace. The task should be checked by another member before the contract
-  is completed and there will be a time period in which members can veto the
-  completed contract before funds are released.
+   The custodian will be responsible for issuing contracts to perform
+   maintenace. The task should be checked by another member before the contract
+   is completed and there will be a time period in which members can veto the
+   completed contract before funds are released.
   
-* voting
-  There will be a number of actions that either require a vote to perform or
-  or that can be opposed/reversed with a veto vote within a certain time period
-  of the action.
+** voting
+   There will be a number of actions that either require a vote to perform or
+   or that can be opposed/reversed with a veto vote within a certain time period
+   of the action.
 
     
