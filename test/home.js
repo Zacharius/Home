@@ -9,11 +9,10 @@ contract('home',async function(accounts)  {
 	Shareholder: 3
     };
 
-    var inst
+    var inst;
 
     
     beforeEach( async function() {
-	console.log(2);
 	var init_val = web3.utils.toWei('1', 'ether');
 	var init_shares = web3.utils.toWei('1', 'ether');
 	var home_name = 'test home';
@@ -40,5 +39,23 @@ contract('home',async function(accounts)  {
 	}else{
 	    assert.ok(1);
 	}
+    });
+
+    it('Add Founding Member', async function() {
+	let founding_member = accounts[1];
+	let founder_type = Member_Type.Inhabitant;
+	let founder_usage = 50;
+	let founder_shares = web3.utils.toWei('1', 'finney');
+
+	await inst.addFoundingMember(founding_member,
+				     founder_type,
+				     founder_usage,
+				     founder_shares);
+
+	let mem = await inst.member.call(founding_member);
+	
+	assert.equal(mem.shares.toNumber(), founder_shares);
+	assert.equal(mem.usage_percent.toNumber(), founder_usage);
+	assert.equal(mem.mem_type.toNumber(), founder_type);
     });
 });
