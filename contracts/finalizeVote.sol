@@ -1,5 +1,4 @@
-pragma solidity ^0.4.22;
-
+pragma solidity ^0.5.0;
 
 contract finalizeVote {
   constructor() public {
