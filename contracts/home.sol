@@ -1,14 +1,16 @@
 pragma solidity ^0.5.0;
 
-import  {Home_lib as Lib} from "./home-lib.sol";
-contract Home {
+import  "./home-lib.sol";
+
+contract Home is Home_base {
 
   
 
-  mapping(address => Lib.Vote) public votes;
-  address[] public vote_addr;
+  mapping(address => Vote) public votes;
+  address[] public votes;
+  uint voteid = 0;
 
-  mapping(address => Lib.Member) public member;
+  mapping(address => Member) public member;
   address[] public mem_addr;
   
   bool finalized = false;
@@ -22,15 +24,13 @@ contract Home {
   uint public home_account;
 
   
-  event newMember(address member, Lib.Member_Type member_type);
-  event homeFinalized(address homeAddress);
-  
+    
   //create contract
   constructor(string memory _name,
 	      uint val,
 	      uint shares,
 	      address founder_addr,
-	      Lib.Member_Type founder_type,
+	      Member_Type founder_type,
 	      uint8 founder_usage,
 	      uint founder_shares) public {
     name = _name;		
@@ -44,7 +44,7 @@ contract Home {
 
   
   function addFoundingMember(address founder_addr,
-			     Lib.Member_Type founder_type,
+			     Member_Type founder_type,
 			     uint8 founder_usage,
 			     uint founder_shares) public {
     require(founder_shares <= total_shares,
@@ -65,9 +65,9 @@ contract Home {
   }
 
   //will check that all conditions are met before changing finalize state
-  function finalizeContract() public {
+  function initFinalizeProp() public {
 
-    require(voteTypeExists(Lib.Vote_Type.Finalize) == false,
+    require(voteTypeExists(Vote_Type.Finalize) == true),
 	    'A finalize vote has already been issued');
 
     require(msg.sender == mem_addr[0],
@@ -77,14 +77,24 @@ contract Home {
     
   }
 
-  function voteTypeExists(Lib.Vote_Type typeOf) internal view returns (bool){
+  function castVote(uint voteID, Vote_Type typeOf) public {
+  }
+
+  function castFinalizeVote(uint voteID, Vote_Type typeOf) internal {
+  }
+  
+  //goes through all proposals to see if a proposal of the given type exists
+  function propTypeExists(Vote_Type typeOf) internal view returns (bool){
 
     for(uint8 i = 0; i<vote_addr.length; i++){
-      if(votes[vote_addr[i]].typeOf == typeOf)
+      
+      if(votes[vote_addr[i]].typeOf == typeOf && )
+
 	return true;
     }
 
     return false;
   }
+
 
 }

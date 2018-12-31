@@ -1,20 +1,27 @@
 pragma solidity ^0.5.0;
 
-library Home_lib {
+contract Home_base {
 
+  enum Vote_Type {
+    For,
+    Against
+  }
+  
   enum Result {
     Undecided,
     Affirmed,
     Denied
   }
 
-  enum Vote_Type {
+  enum Proposal_Type {
     Finalize
   }
   
-  struct Vote {
-    Vote_Type typeOf;
+  struct Proposal {
+    Proposal typeOf;
     Result result;
+    uint pro;
+    uint con;
   }
 
   enum Member_Type { 
@@ -29,5 +36,9 @@ library Home_lib {
     uint8 usage_percent;//percent of Home Member is using
     uint account;//Ether Home is holding for Member
   }
+
+  event newVote(Vote_Type typeOf, uint id);
+  event newMember(address member, Member_Type member_type);
+  event homeFinalized(address homeAddress);
 
 }
