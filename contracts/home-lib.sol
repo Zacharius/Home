@@ -18,7 +18,7 @@ contract Home_base {
   }
   
   struct Proposal {
-    Proposal typeOf;
+    Proposal_Type typeOf;
     Result result;
     uint pro;
     uint con;
