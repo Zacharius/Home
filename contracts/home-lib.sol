@@ -2,6 +2,11 @@ pragma solidity ^0.5.0;
 
 contract Home_base {
 
+  //constants
+  uint constant public TOTAL_SHARES = 1000000000000000000;// 10^18
+
+  uint8 constant APPROVAL_PROP_THRESHOLD = 100;
+  //enums and structs
   enum Vote_Type {
     For,
     Against
@@ -37,6 +42,7 @@ contract Home_base {
     uint account;//Ether Home is holding for Member
   }
 
+  //events
   event newVote(Vote_Type typeOf, uint id);
   event newMember(address member, Member_Type member_type);
   event homeFinalized(address homeAddress);

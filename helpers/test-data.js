@@ -5,7 +5,6 @@ const Constants = require('../helpers/constants');
 
 async function initializeHome(){
     var init_val = web3.utils.toWei('1', 'ether');
-    var init_shares = web3.utils.toWei('1', 'ether');
     var home_name = 'test home';
 
     var founder_type = Constants.Member_Type.Custodian;
@@ -14,7 +13,6 @@ async function initializeHome(){
 
     return await Home.new(home_name,
 				init_val,
-				init_shares,
 				founder_type,
 				founder_usage,
 				founder_shares);
