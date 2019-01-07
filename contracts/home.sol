@@ -6,13 +6,13 @@ contract Home is Home_base {
 
   
 
-  mapping(uint => Proposal) public proposal;
+  mapping(uint => Proposal) public proposals;
   uint public propID = 0;
 
   mapping(address => Member) public member;
   address[] public mem_addr;
   
-  bool approved = false;
+  bool public confirmed = false;
 
   string public name;
   uint public total_val;
@@ -48,7 +48,7 @@ contract Home is Home_base {
 	    'Not enough shares available');
     require(founder_usage <= 100,
 	    '% usage must be less than 100');
-    require(approved == false,
+    require(confirmed == false,
 	    'It is too late to add a founding member');
     
     mem_addr.push(founder_addr);
@@ -64,36 +64,94 @@ contract Home is Home_base {
   }
 
   //will check that all conditions are met before changing finalize state
-  function initFinalizeProp() public {
+  function initConfirmationProp() public {
 
-    require(propTypeExists(Proposal_Type.Finalize) == true,
+    require(propTypeExists(Proposal_Type.Confirmation) == false,
 	    'A finalize vote has already been issued');
-
     require(msg.sender == mem_addr[0],
 	    'Only the contract creator can call a finalize vote');
 
-    
-    
+    uint id = addProposal(Proposal_Type.Confirmation);
+
+    //it is assumed that the original founder is in favor of approval
+    castVote(id, Vote_Type.For);
   }
 
-  function castVote(uint voteID, Vote_Type typeOf) public {
+  function castVote(uint id, Vote_Type typeOf) public {
+ 
+    require(isaMember(msg.sender) == true,
+	      'only members can vote');
+    require(proposals[id].result == Result.Undecided,
+	    'this vote has already been decided');
+
+    Proposal_Type propType = proposals[id].typeOf;
+
+    if(propType == Proposal_Type.Confirmation){
+      castConfirmationVote(msg.sender, id, typeOf);
+    }
+
+  }
+  
+  function castConfirmationVote(address addr, uint id, Vote_Type typeOf) internal {
+    
+    Vote memory vote;
+    vote.member = addr;
+    vote.typeOf = typeOf;
+    proposals[id].votes.push(vote);
+
+    emit voteCast(typeOf, id);
+
+    checkConfirmationProp(id);
   }
 
-  function castFinalizeVote(uint voteID, Vote_Type typeOf) internal {
+  function checkConfirmationProp(uint id) internal {
+    Proposal memory prop = proposals[id];
+
+    Vote[] memory votes = prop.votes;
+
+    uint total_members = mem_addr.length;
+    uint pro = 0;
+    
+    for(uint i=0; i<votes.length; i++){
+      if(votes[i].typeOf == Vote_Type.For) {
+	pro++;
+      }
+    } 
+    
+
+    if((pro/total_members) * 100 >= APPROVAL_PROP_THRESHOLD) {
+      prop.result = Result.Affirmed;
+      confirmed = true;
+      emit propFinished(propID, prop.typeOf, prop.result);
+      emit homeFinalized();
+
+      } 
   }
   
   //goes through all proposals to see if a proposal of the given type exists
   function propTypeExists(Proposal_Type typeOf) internal view returns (bool){
 
     for(uint8 i = 0; i<propID; i++){
-      
-      if(proposal[i].typeOf == typeOf  )
-
+      if(proposals[i].typeOf == typeOf  &&
+	 proposals[i].result== Result.Undecided )
 	return true;
     }
 
     return false;
   }
 
+  function addProposal(Proposal_Type typeOf) internal returns(uint) {
+    proposals[propID].typeOf = typeOf;
+    emit newProp(typeOf, propID);
+    return propID++;
+  }
 
+
+  function isaMember(address addr) internal view returns (bool) {
+    for(uint i=0; i<mem_addr.length; i++){
+      if(mem_addr[i] == addr)
+	return true;
+    }
+    return false;
+  }
 }

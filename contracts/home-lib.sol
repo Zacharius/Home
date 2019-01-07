@@ -19,21 +19,27 @@ contract Home_base {
   }
 
   enum Proposal_Type {
-    Finalize
+   Confirmation 
   }
   
-  struct Proposal {
-    Proposal_Type typeOf;
-    Result result;
-    uint pro;
-    uint con;
-  }
-
   enum Member_Type { 
     Custodian,
     Inhabitant,
     Member,
-    Shareholder }
+    Shareholder
+  }
+
+  struct Vote {
+    Vote_Type typeOf;
+    address member;
+  }
+
+  struct Proposal {
+    Proposal_Type typeOf;
+    Result result;
+    Vote[] votes;
+  }
+
 
   struct Member {
     uint shares;
@@ -43,8 +49,10 @@ contract Home_base {
   }
 
   //events
-  event newVote(Vote_Type typeOf, uint id);
+  event propFinished(uint propID, Proposal_Type typeOf, Result result);
+  event newProp(Proposal_Type typeOf, uint propID);
+  event voteCast(Vote_Type typeOf, uint propID);
   event newMember(address member, Member_Type member_type);
-  event homeFinalized(address homeAddress);
+  event homeFinalized();
 
 }
