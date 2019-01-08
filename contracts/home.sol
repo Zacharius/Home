@@ -21,7 +21,27 @@ contract Home is Home_base {
   uint public home_shares;
   uint public home_account;
 
-  
+  modifier isMember {
+    bool _isMember = false;
+    
+    for(uint i=0; i<mem_addr.length; i++){
+      if(mem_addr[i] == msg.sender){
+	_isMember = true;
+	break;
+      }
+    }
+
+    require(_isMember,
+	    'only members can call this function');
+    _;
+  }
+
+  modifier isConfirmed {
+    require(confirmed,
+	    'contract must be confirmed before action can be taken');
+    _;
+  }
+
     
   //create contract
   constructor(string memory _name,
@@ -77,10 +97,8 @@ contract Home is Home_base {
     castVote(id, Vote_Type.For);
   }
 
-  function castVote(uint id, Vote_Type typeOf) public {
+  function castVote(uint id, Vote_Type typeOf) isMember public {
  
-    require(isaMember(msg.sender) == true,
-	      'only members can vote');
     require(proposals[id].result == Result.Undecided,
 	    'this vote has already been decided');
 
@@ -147,11 +165,5 @@ contract Home is Home_base {
   }
 
 
-  function isaMember(address addr) internal view returns (bool) {
-    for(uint i=0; i<mem_addr.length; i++){
-      if(mem_addr[i] == addr)
-	return true;
-    }
-    return false;
-  }
+  
 }
