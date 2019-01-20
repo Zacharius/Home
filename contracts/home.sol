@@ -83,6 +83,10 @@ contract Home is Home_base {
 
   }
 
+  //creates new share offer contract
+  function offerShares(uint amount) isMember public {
+  }
+
   //will check that all conditions are met before changing finalize state
   function initConfirmationProp() public {
 
@@ -163,6 +167,8 @@ contract Home is Home_base {
     emit newProp(typeOf, propID);
     return propID++;
   }
+
+
 
 
   
