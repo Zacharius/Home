@@ -34,7 +34,7 @@ contract Home_offer is Home_base {
   function buy(uint amount) public payable {}
 
   //allow buyer to collect refund if he has overspent
-  function refund() public {}
+  function refund() public returns (uint){}
 
   //get member type of potential buyer from Home
   function getMemberType(address buyer) public {}

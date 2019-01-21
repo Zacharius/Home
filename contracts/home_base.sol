@@ -54,5 +54,6 @@ contract Home_base {
   event voteCast(Vote_Type typeOf, uint propID);
   event newMember(address member, Member_Type member_type);
   event homeFinalized();
+  event sharesOffered(uint amount, address offerer, address offer_contract); 
 
 }

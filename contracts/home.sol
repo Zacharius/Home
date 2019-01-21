@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import  "./home-lib.sol";
+import  "./home_base.sol";
 
 contract Home is Home_base {
 
@@ -169,6 +169,11 @@ contract Home is Home_base {
   }
 
 
+  //return current share price, with discount added if applicable too member
+  function calcSharePrice(address member) isConfirmed public returns(uint) {}
+
+  //create offer contract, subtract amount from creator's shares
+  function offerShares(uint amount) isMember, isConfirmed public {}
 
 
   
