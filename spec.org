@@ -12,8 +12,8 @@ placeholder.
 
      The first vote will be to confirm that the initial valuation is agreed
      upon. Until members can agree upon the valuation, nothing else can be done.
-** Member types
-   Each member will have several properties associated with their account.
+** Shareholder types
+   Each shareholder will have several properties associated with their account.
    - account address
    - # of shares
    - status
@@ -52,40 +52,62 @@ placeholder.
     paid as a sort of security deposit. 
 *** Members
     Stakeholders who have the ability to vote and purchase more shares
-*** Stakeholders
-    Stakeholders are simply anyone who owns any shares in the Home. 
+*** Shareholder
+    Shareholders are simply anyone who owns any shares in the Home. 
 
-    Simply being a stakeholder does not give you the ability to buy more shares
+    Simply being a shareholder does not give you the ability to buy more shares
     or vote
    
 ** Shares, Buying, Selling
    Upon Home creation, a fixed amount of shares will be generated and distributed
    accoring to the info given. 
 
-   Shares will be priced as their proportional fraction of the total home
-   valuation, how and how often this valuation will occur is a difficult question
-   left unanswered for now
-
    Once a home is created, a marketplace will be established that will allow
    stakeholders to buy and sell shares amongst each other.
 
-   Any stakeholder can put their shares up for sale at any time. 
+   Any shareholder can put their shares up for sale at any time. 
 
    Once shares are put up, there will be a period in which only inhabitants can
    buy those shares, a week or so. 
 
    Once that period is up, any member can buy those shares.
   
-   This marketplace will be closed to stakeholders and all others. 
+   This marketplace will be closed to shareholders and all others. 
   
    Currently I think the only path to becoming a member should be to live in the
    Home for some period of time
      
-   This is to try and keep the stakeholders invested in the long term health of
+   This is to try and keep the majority of shareholders invested in the long term health of
    the house, foster a community, and prevent speculation.
   
-   Stakeholders can also pass their shares on to other stakeholders free of charge,
+   Shareholders can also pass their shares on to other shareholders free of charge,
    if they so wish
+
+   
+** valuation
+   Determining how to price Home is probably the hardest technical
+   problem. Everything else about the Home can be decided as a function of group
+   consesus among stakeholders, but around price the different member types will
+   have different incentives. The current inhabitants and those trying to buy
+   shares will want to undervalue the house, while those wanting to sell their
+   shares will want to overvalue it. Collusion to try and manipulate the price
+   will be rampant. 
+
+   + Right now I have two possible solutions.
+
+     1. Upon initiation determining an address which we will trust to provide the
+	correct price. This address alone will be able to update the valuation of
+	the Home. This is basically punting the problem, saying that we are
+	putting our complete trust in whoever owns this address. This is not a
+	good solution but allows us to design the system around the problem,
+	allowing it to be more fully solved at a later date.
+     2. Allow the price to be determined by the market. Instead of buying/selling
+	shares at market price, allow people the option of putting their shares up
+	for auction. valuation will be determined as a function of the share
+        price at last auction, or last several auctions. The major problem with
+        this is that in many cases the 'market' of potential buyers will be to
+        small to prevent price manipulation through collusion. 
+
 
 
 ** Rent
