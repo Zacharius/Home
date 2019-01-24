@@ -101,7 +101,7 @@ contract Home is Home_base {
     castVote(id, Vote_Type.For);
   }
 
-  function castVote(uint id, Vote_Type typeOf) isMember public {
+  /*function castVote(uint id, Vote_Type typeOf) isMember public {
  
     require(proposals[id].result == Result.Undecided,
 	    'this vote has already been decided');
@@ -148,7 +148,7 @@ contract Home is Home_base {
       emit homeFinalized();
 
       } 
-  }
+      }*/
   
   //goes through all proposals to see if a proposal of the given type exists
   function propTypeExists(Proposal_Type typeOf) internal view returns (bool){
