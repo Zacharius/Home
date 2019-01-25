@@ -1,17 +1,10 @@
 pragma solidity ^0.5.0;
 
-import  "./home_base.sol";
-import "./home.sol";
+import "./proposal.sol";
 
-contract Confirmation_prop is Home_base {
+contract Confirmation_prop is Proposal {
 
   Proposal_Type public typeOf = Proposal_Type.Confirmation;
-  bool public open = true;
-  Vote[] public votes;
-  Home public home;
-
-  uint public pro = 0;
-  uint public con = 0;
 
   constructor() public {
     home = Home(msg.sender);
@@ -44,29 +37,29 @@ contract Confirmation_prop is Home_base {
     tallyVote();
   }
 
-  function tallyVote() internal {
+  function tallyVote() internal view{
     uint total_members = getTotalMembers();
 
     if( (pro/total_members) * 100 >= CONFIRMATION_PROP_THRESHOLD) {
-      sendFinalResult();
+      finalizeResults();
     }
 
   }
 
-  function sendFinalResult() internal {
-    home.receivePropResults();
+  function finalizeResults() internal {
+    home.finalizePropResults();
   }
 
-  function isMember(address _member) internal returns(bool) {
+  function isMember(address _member) internal view returns(bool) {
     return home.isMember(_member); 
   }
 
-  function getTotalMembers() internal returns (uint) {
+  function getTotalMembers() internal view returns (uint) {
     return home.getTotalMembers();
   }
 
   //returns index of vote for voter, -1 if voter hasn't voted yet
-  function getPreviousVote(address voter) internal returns (int) {
+  function getPreviousVote(address voter) internal view returns (int) {
     for(uint i = 0; i<votes.length; i++){
       Vote storage vote = votes[i];
       if(vote.member == voter){
