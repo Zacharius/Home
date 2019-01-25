@@ -47,7 +47,7 @@ contract Confirmation_prop is Proposal {
   }
 
   function finalizeResults() internal {
-    home.finalizePropResults();
+    home.implementPropResults();
   }
 
   function isMember(address _member) internal view returns(bool) {

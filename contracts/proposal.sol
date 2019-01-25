@@ -4,8 +4,8 @@ import  "./home_base.sol";
 import "./home.sol";
 
 contract Proposal is Home_base {
-  Proposal_Type typeOf;
-  Result result = Result.Undecided;
+  Proposal_Type public typeOf;
+  Result public result = Result.Undecided;
 
   Home public home;
 

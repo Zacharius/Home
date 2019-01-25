@@ -1,12 +1,11 @@
 pragma solidity ^0.5.0;
 
 import  "./home_base.sol";
+import "./proposal.sol";
 import "./confirmation_prop.sol";
 
+
 contract Home is Home_base {
-
-  
-
 
   mapping(address => Member) public member;
   address[] public mem_addr;
@@ -15,6 +14,8 @@ contract Home is Home_base {
 
   string public name;
   uint public total_val;
+
+  Proposal[] public props;
 
   //assets owned by Home, in shares of itself and Ether
   uint public home_shares;
@@ -64,20 +65,43 @@ contract Home is Home_base {
 
     home_shares -= founder_shares;
   }
+  function issueProposal(Proposal_Type typeOf) public {
+    Proposal prop;
+    
+    if(typeOf == Proposal_Type.Confirmation){
+      require(msg.sender == mem_addr[0],
+	      'only contract creator can call finalize vote');
+      prop = new Confirmation_prop();
 
-  //will check that all conditions are met before changing finalize state
-  function initConfirmationProp() public {
+    }
 
-    //    require(propTypeExists(Proposal_Type.Confirmation) == false,
-    //	    'A finalize vote has already been issued');
-    require(msg.sender == mem_addr[0],
-	    'Only the contract creator can call a finalize vote');
-
-    //uint id = addProposal(Proposal_Type.Confirmation);
-
-    //it is assumed that the original founder is in favor of approval
-    //castVote(id, Vote_Type.For);
+    if(address(prop) != address(0)){
+      props.push(prop);
+      emit newProp(typeOf, address(prop));
+    }
   }
+
+  function implementPropResults() public {
+    Proposal prop = Proposal(msg.sender);
+    require(isProp(prop),
+	    'Not a valid proposal');
+    require(prop.result() != Result.Undecided,
+	    'Prop is still being decided on');
+
+    emit propFinished(prop.typeOf(), prop.result(), address(prop));
+
+    if(prop.typeOf() == Proposal_Type.Confirmation){
+      if(prop.result() == Result.Denied){
+	return;
+      }
+      else if(prop.result() == Result.Affirmed){
+	confirmed = true;
+	emit homeConfirmed();
+      }
+    }
+  }
+
+   
 
   //return current share price, with discount added if applicable too member
   function calcSharePrice(address _member) isConfirmed public returns(uint) {}
@@ -85,7 +109,7 @@ contract Home is Home_base {
   //create offer contract, subtract amount from creator's shares
   function offerShares(uint _amount)  isConfirmed public {}
 
-  function isMember(address _member) public returns (bool){
+  function isMember(address _member) public view returns (bool){
     bool _isMember = false;
     
     for(uint i=0; i<mem_addr.length; i++){
@@ -98,7 +122,21 @@ contract Home is Home_base {
     return _isMember;
   }
 
-  function getTotalMembers() public returns (uint){
+  function isProp(Proposal prop) public view returns (bool){
+    bool _isProp = false;
+
+    for(uint i=0; i<props.length; i++){
+      if(props[i] == prop){
+	_isProp = true;
+	break;
+      }
+    }
+
+    return _isProp;
+  }
+
+  function getTotalMembers() public view returns (uint){
     return mem_addr.length;
   }
+
 }

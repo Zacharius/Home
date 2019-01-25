@@ -34,11 +34,6 @@ contract Home_base {
     address member;
   }
 
-  struct Proposal {
-    Proposal_Type typeOf;
-    address location;
-  }
-
 
   struct Member {
     uint shares;
@@ -48,11 +43,11 @@ contract Home_base {
   }
 
   //events
-  event propFinished(uint propID, Proposal_Type typeOf, Result result);
-  event newProp(Proposal_Type typeOf, uint propID);
+  event propFinished(Proposal_Type typeOf, Result result, address location);
+  event newProp(Proposal_Type typeOf, address location);
   event voteCast(Vote_Type vote_type, Proposal_Type prop_type, address voter, address location);
   event newMember(address member, Member_Type member_type);
-  event homeFinalized();
+  event homeConfirmed();
   event sharesOffered(uint amount, address offerer, address offer_contract); 
 
 }
