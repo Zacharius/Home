@@ -22,7 +22,7 @@ placeholder.
      + 0 if non inhabitant
       
       
-   The following iis listed in order of exclusivity, so all inhabitants are
+   The following is listed in order of exclusivity, so all inhabitants are
    members, and all members are stakeholders, etc.
 
 *** The Custodian
@@ -59,29 +59,33 @@ placeholder.
     or vote
    
 ** Shares, Buying, Selling
-   Upon Home creation, a fixed amount of shares will be generated and distributed
-   accoring to the info given. 
+   - Upon Home creation, a fixed amount of shares will be generated and distributed
+     accoring to the info given. 
 
-   Once a home is created, a marketplace will be established that will allow
-   stakeholders to buy and sell shares amongst each other.
+   - Once a home is created, a marketplace will be established that will allow
+     stakeholders to buy and sell shares amongst each other.
 
-   Any shareholder can put their shares up for sale at any time. 
+   - Any shareholder can put their shares up for sale at any time. They will be
+     sold as an auction.
 
-   Once shares are put up, there will be a period in which only inhabitants can
-   buy those shares, a week or so. 
+   - Once shares are put up, there will be a period in which only inhabitants can
+     buy those shares, a week or so. 
 
-   Once that period is up, any member can buy those shares.
+   - Once that period is up, any member can buy those shares.
   
-   This marketplace will be closed to shareholders and all others. 
+   - This marketplace will be closed to shareholders and all others.
+
+   - At regular intervals there will be a number of shares put on the market for
+     to buy for the purposes of price discovery. See valuation section for more details.
   
-   Currently I think the only path to becoming a member should be to live in the
-   Home for some period of time
+   - Currently I think the only path to becoming a member should be to live in the
+     Home for some period of time
      
-   This is to try and keep the majority of shareholders invested in the long term health of
-   the house, foster a community, and prevent speculation.
+   - This is to try and keep the majority of shareholders invested in the long term health of
+     the house, foster a community, and prevent speculation.
   
-   Shareholders can also pass their shares on to other shareholders free of charge,
-   if they so wish
+   - Shareholders can also pass their shares on to other shareholders free of charge,
+     if they so wish
 
    
 ** valuation
@@ -92,38 +96,57 @@ placeholder.
    shares will want to undervalue the house, while those wanting to sell their
    shares will want to overvalue it. Collusion to try and manipulate the price
    will be rampant. 
+   
 
-   + Right now I have two possible solutions.
+   + This is my current solution: Bellweather Auctions
+     At regular intervals a small number of shares will be put on the market for
+     anyone to buy, shareholder or no. They will be sold as an auction, with the
+     shares going to whomever is willing to pay the most. The purpose of the
+     shares will be price discovery. The average of the final price for these
+     shares will be used to price the house and individual shares. These shares
+     will come with a gurantee to not be forcibly sold for some time period, 5
+     years?. After this time these shares will be first in line to be bought by
+     the current tenants of the house if no one voluntarily sells. 
 
-     1. Upon initiation determining an address which we will trust to provide the
-	correct price. This address alone will be able to update the valuation of
-	the Home. This is basically punting the problem, saying that we are
-	putting our complete trust in whoever owns this address. This is not a
-	good solution but allows us to design the system around the problem,
-	allowing it to be more fully solved at a later date.
-     2. Allow the price to be determined by the market. Instead of buying/selling
-	shares at market price, allow people the option of putting their shares up
-	for auction. valuation will be determined as a function of the share
-        price at last auction, or last several auctions. The major problem with
-        this is that in many cases the 'market' of potential buyers will be to
-        small to prevent price manipulation through collusion. 
+  
+***  alternative solutions
+
+      1. Upon initiation determining an address which we will trust to provide the
+	 correct price. This address alone will be able to update the valuation of
+	 the Home. This is basically punting the problem, saying that we are
+	 putting our complete trust in whoever owns this address. This is not a
+	 good solution but allows us to design the system around the problem,
+	 allowing it to be more fully solved at a later date.
+      2. Allow the price to be determined by the market of current
+         members. Instead of buying/selling shares at market price, allow people
+         the option of putting their shares up for auction. valuation will be
+         determined as a function of the share price at last auction, or last
+         several auctions. The major problem with this is that in many cases the
+         'market' of potential buyers will be to small to prevent price
+         manipulation through collusion.
 
 
 
 ** Rent
-   The Inhabitants of a Home are responsible for paying the cost of a Home's
-   continuing existence. This could include property taxes, maintenance,
-   mortage, custodian salary, etc. The monthly cost will be estimated and split
-   among the inhabitants according to the percent of the home they occupy. 
+   - The Inhabitants of a Home are responsible for paying the cost of a Home's
+     continuing existence. This could include property taxes, maintenance,
+     mortage, custodian salary, etc. 
 
-   On top of that there will be a min and max number of shares that each
-   inhabitant must/can buy each month. 
-   These shares will be purchased from one of the following sources, in order of
-   priority:
-   1. shares currently for sell on the marketplace
-   2. shares owned by a stakeholder 
-   3. shares owned by the member for whom the greatest amount of time has past since
-   they lived in the house
+   - The monthly cost will be estimated and split among the inhabitants
+     according to the percent of the home they occupy.
+   
+   - If an inhabitant cannot pay what they owe, shares may be taken to cover the cost
+
+   - On top of that there will be a min and max number of shares that each
+     inhabitant must/can buy each month. 
+
+   - These shares will be purchased from one of the following sources, in order of
+     priority:
+     1. shares currently for sell on the marketplace
+     2. shares owned by the stakeholder for whom the greatest amount of time has
+	past since they received the shares.
+     3. shares owned by the member for whom the greatest amount of time has past
+	since they lived in the house
    
    The min number could potentially be 0 but I think it should be greater, to
    ensure that all inhabitants are at least partially invested in the long term
