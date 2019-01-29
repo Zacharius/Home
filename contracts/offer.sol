@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import  "./home-lib.sol";
+import  "./home_base.sol";
 
 //offer home shares to another
 contract Home_offer is Home_base {

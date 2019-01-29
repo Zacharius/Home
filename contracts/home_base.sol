@@ -5,7 +5,7 @@ contract Home_base {
   //constants
   uint constant public TOTAL_SHARES = 1000000000000000000;// 10^18
 
-  uint8 constant APPROVAL_PROP_THRESHOLD = 100;
+  uint8 constant CONFIRMATION_PROP_THRESHOLD = 100;
   //enums and structs
   enum Vote_Type {
     For,
@@ -34,12 +34,6 @@ contract Home_base {
     address member;
   }
 
-  struct Proposal {
-    Proposal_Type typeOf;
-    Result result;
-    Vote[] votes;
-  }
-
 
   struct Member {
     uint shares;
@@ -49,11 +43,14 @@ contract Home_base {
   }
 
   //events
-  event propFinished(uint propID, Proposal_Type typeOf, Result result);
-  event newProp(Proposal_Type typeOf, uint propID);
-  event voteCast(Vote_Type typeOf, uint propID);
+  event propFinished(Proposal_Type typeOf, Result result, address location);
+  event newProp(Proposal_Type typeOf, address location);
+  event voteCast(Vote_Type voteType,
+		 Proposal_Type propType,
+		 address member,
+		 address location);
   event newMember(address member, Member_Type member_type);
-  event homeFinalized();
+  event homeConfirmed();
   event sharesOffered(uint amount, address offerer, address offer_contract); 
 
 }
