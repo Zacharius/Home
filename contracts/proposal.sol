@@ -14,6 +14,15 @@ contract Proposal is Home_base {
   Vote[] public votes;
 
   function castVote(Vote_Type _typeOf) public;
-  function tallyVote() internal view;
+  function tallyVote() internal;
   function finalizeResults() internal;
+  function getVote(address member) public view returns (Vote_Type){
+
+    for (uint i=0; i<votes.length; i++){
+      if( votes[i].member == member)
+	return votes[i].typeOf;
+    }
+
+    revert('member doesnt exist');
+  }
 }

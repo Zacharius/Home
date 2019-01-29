@@ -1,13 +1,13 @@
 pragma solidity ^0.5.0;
 
 import "./proposal.sol";
+import  "./home_base.sol";
 
 contract Confirmation_prop is Proposal {
 
-  Proposal_Type public typeOf = Proposal_Type.Confirmation;
-
   constructor() public {
     home = Home(msg.sender);
+    typeOf = Proposal_Type.Confirmation;
   }
 
   function castVote(Vote_Type vote_type) public {
@@ -37,10 +37,11 @@ contract Confirmation_prop is Proposal {
     tallyVote();
   }
 
-  function tallyVote() internal view{
+  function tallyVote() internal {
     uint total_members = getTotalMembers();
 
     if( (pro/total_members) * 100 >= CONFIRMATION_PROP_THRESHOLD) {
+      result = Result.Affirmed;
       finalizeResults();
     }
 

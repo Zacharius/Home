@@ -45,7 +45,10 @@ contract Home_base {
   //events
   event propFinished(Proposal_Type typeOf, Result result, address location);
   event newProp(Proposal_Type typeOf, address location);
-  event voteCast(Vote_Type vote_type, Proposal_Type prop_type, address voter, address location);
+  event voteCast(Vote_Type voteType,
+		 Proposal_Type propType,
+		 address member,
+		 address location);
   event newMember(address member, Member_Type member_type);
   event homeConfirmed();
   event sharesOffered(uint amount, address offerer, address offer_contract); 

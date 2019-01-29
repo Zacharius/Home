@@ -10,7 +10,20 @@ const Vote_Type = {
     Against: 1
 };
 
+const Proposal_Type = {
+    Confirmation: 0
+};
+
+const Result= {
+    Undecided: 0,
+    Affirmed: 1,
+    Denied: 2
+}
+    
+
 module.exports = {
     Member_Type,
-    Vote_Type
+    Vote_Type,
+    Proposal_Type,
+    Result
 };

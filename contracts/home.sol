@@ -65,17 +65,21 @@ contract Home is Home_base {
 
     home_shares -= founder_shares;
   }
+
+  
   function issueProposal(Proposal_Type typeOf) public {
     Proposal prop;
+    bool issued = false;
     
     if(typeOf == Proposal_Type.Confirmation){
       require(msg.sender == mem_addr[0],
 	      'only contract creator can call finalize vote');
+      issued = true;
       prop = new Confirmation_prop();
 
     }
 
-    if(address(prop) != address(0)){
+    if(issued){
       props.push(prop);
       emit newProp(typeOf, address(prop));
     }
