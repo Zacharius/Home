@@ -5,6 +5,7 @@
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
 
 // ----------------------------------------------------------------------------
+pragma solidity ^0.5.0;
 
 contract ERC20Interface {
 

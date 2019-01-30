@@ -3,9 +3,10 @@ pragma solidity ^0.5.0;
 import  "./home_base.sol";
 import "./proposal.sol";
 import "./confirmation_prop.sol";
+import "./erc20.sol";
 
 
-contract Home is Home_base {
+contract Home is Home_base, ERC20Interface {
 
   mapping(address => Member) public member;
   address[] public mem_addr;
@@ -142,5 +143,22 @@ contract Home is Home_base {
   function getTotalMembers() public view returns (uint){
     return mem_addr.length;
   }
+
+  function totalSupply() public view returns (uint){
+    return TOTAL_SHARES;
+  }
+
+  function balanceOf(address tokenOwner) public view returns (uint balance){}
+
+  function allowance(address tokenOwner, address spender) public view returns (uint remaining){}
+
+  function transfer(address to, uint tokens) public returns (bool success){}
+
+  function approve(address spender, uint tokens) public returns (bool success){}
+
+  function transferFrom(address from, address to, uint tokens) public returns (bool success){}
+
+
+  
 
 }
