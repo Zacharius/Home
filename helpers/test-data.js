@@ -1,4 +1,5 @@
 const Home = artifacts.require('Home');
+const Confirmation_prop = artifacts.require('Confirmation_prop');
 const Helper = require('./test-helper');
 const Constants = require('../helpers/constants');
 
@@ -18,6 +19,27 @@ async function initializeHome(){
 				founder_shares);
 }
 
+async function initHomeWithMembers(addresses, confirmed) {
+    let home = await initializeHome();
+    addresses.forEach(function(address) {
+	addFoundingMember(home, address);
+    });
+    return home;
+}
+
+async function confirmHome(home, members){
+    home.issueProposal(Constants.Proposal_Type.Confirmation,
+		       {from: members[0]});
+    let propAddr = await home.props.call(0);
+    let prop = await Confirmation_prop.at(propAddr);
+    members.forEach(function(member) {
+	prop.castVote(Constants.Vote_Type.For,
+		      {from: member});
+    });
+}
+    
+		     
+
 async function addFoundingMember(home, address) {
     let founding_member = address;
     let founder_type = Constants.Member_Type.Inhabitant;
@@ -31,8 +53,11 @@ async function addFoundingMember(home, address) {
 }
 
 
+
 module.exports = {
     initializeHome,
-    addFoundingMember
+    addFoundingMember,
+    initHomeWithMembers,
+    confirmHome
 };
 
