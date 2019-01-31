@@ -27,8 +27,7 @@ contract('home',async function(accounts)  {
 
 	before(async function() {
 	    let accts = accounts.slice(0,6);
-	    Home = await Helper.initHomeWithMembers(accts);
-	    await Helper.confirmHome(Home, accts);
+	    Home = await Helper.initHomeWithMembers(accts, true);
 	});
 
 	it('balanceOf member', async function() {
@@ -55,7 +54,7 @@ contract('home',async function(accounts)  {
 
 	    let new_balance = await Home.balanceOf(accounts[1]);
 
-	    assert.equal(prev_bal+2, new_balance);
+	    assert.equal(prev_bal.toNumber()+2, new_balance.toNumber());
 	});
 
 	it('transfer to nonmember from member', async function() {
@@ -87,10 +86,13 @@ contract('home',async function(accounts)  {
 	    let amount = 10;
 	    
 	    let allow_old = await Home.allowance(owner, spender);
-	    await Home.approve(spender, amount, {from: owner});
+	    let success = await Home.approve(spender, amount, {from: owner});
+	    if(!success)
+		assert.ok(-1);
+	    
 	    let allow_new = await Home.allowance(owner, spender);
 
-	    assert.equal(allow_old+amount, allow_new);
+	    assert.equal(allow_old.toNumber()+amount, allow_new);
 	});
 
 	it('approve amount to nonmember', async function() {
