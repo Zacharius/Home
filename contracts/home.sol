@@ -10,6 +10,9 @@ contract Home is Home_base, ERC20Interface {
 
   mapping(address => Member) public member;
   address[] public mem_addr;
+
+  //funds approved to be transfered from one party to another
+  mapping(address => mapping(address => uint)) public allowed;
   
   bool public confirmed = false;
 
@@ -56,6 +59,8 @@ contract Home is Home_base, ERC20Interface {
 	    '% usage must be less than 100');
     require(confirmed == false,
 	    'It is too late to add a founding member');
+    require(!isMember(founder_addr),
+	    'Is alraedy a member');
     
     mem_addr.push(founder_addr);
     member[founder_addr].mem_type = founder_type;
@@ -135,6 +140,7 @@ contract Home is Home_base, ERC20Interface {
 	_isProp = true;
 	break;
       }
+	
     }
 
     return _isProp;
@@ -144,19 +150,81 @@ contract Home is Home_base, ERC20Interface {
     return mem_addr.length;
   }
 
-  function totalSupply() public view returns (uint){
+  function totalSupply() isConfirmed public view returns (uint){
     return TOTAL_SHARES;
   }
 
-  function balanceOf(address tokenOwner) public view returns (uint balance){}
+  function balanceOf(address tokenOwner)
+    isConfirmed public view returns (uint balance){
 
-  function allowance(address tokenOwner, address spender) public view returns (uint remaining){}
+    if(isMember(tokenOwner)){
+       return member[tokenOwner].shares;
+    }else{
+	return 0;
+    }
 
-  function transfer(address to, uint tokens) public returns (bool success){}
+	 
+  }
 
-  function approve(address spender, uint tokens) public returns (bool success){}
+  function allowance(address tokenOwner, address spender)
+    isConfirmed public view returns (uint remaining){
+    return allowed[tokenOwner][spender];
+  }
 
-  function transferFrom(address from, address to, uint tokens) public returns (bool success){}
+  function transfer(address to, uint tokens)
+    isConfirmed public returns (bool success){
+
+    if(!isMember(msg.sender)){
+      return false;
+    }
+
+    if(!isMember(to)){
+      return false;
+    }
+
+    if(member[msg.sender].shares < tokens){
+      revert('Not enough shares to complete transaction');
+    }
+
+    member[msg.sender].shares -= tokens;
+    member[to].shares += tokens;
+    emit Transfer(msg.sender, to, tokens);
+    return true;
+
+  }
+
+  function approve(address spender, uint tokens)
+    isConfirmed public returns (bool success){
+    if(!isMember(msg.sender)){
+      return false;
+    }
+
+    if(!isMember(spender)){
+      return false;
+    }
+
+    if(tokens > member[msg.sender].shares){
+      tokens = member[msg.sender].shares;
+    }
+
+    allowed[msg.sender][spender] = tokens;
+    emit Approval(msg.sender, spender, tokens);
+    return true;
+  }
+  
+
+  function transferFrom(address from, address to, uint tokens)
+    isConfirmed public returns (bool success){
+
+    //amount requested must have been preapproved
+    require(allowance(from, to) >= tokens,
+	    'requested funds have not been allowed');
+
+    allowed[from][to] -= tokens;
+    member[msg.sender].shares -= tokens;
+
+    
+  }
 
 
   
