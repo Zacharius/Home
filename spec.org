@@ -1,17 +1,19 @@
 * Home
-An ethereum project to create a house that owns itself. Name above is
-placeholder. 
-** initiation
+An ethereum project to create a system for the shared ownership, use, and governance
+of a physical object. Name above is placeholder. 
+** Initiation
    A Home is created by creating a Home contract. A Home contract requires the
    following parameters
    - A list of starting members, this will include their
      + Account address
      + percentage of shares they begin with
      + member status
-   - The initial valueation of the Home. This will be the sum total of all shares
 
-     The first vote will be to confirm that the initial valuation is agreed
-     upon. Until members can agree upon the valuation, nothing else can be done.
+   - The initial valueation of the Home.
+
+   - The first vote will be to confirm that the initial valuation and starting
+     shares are agreed upon. Until members can agree upon the valuation, nothing
+     else can be done.
 ** Shareholder types
    Each shareholder will have several properties associated with their account.
    - account address
@@ -22,41 +24,45 @@ placeholder.
      + 0 if non inhabitant
       
       
-   The following is listed in order of exclusivity, so all inhabitants are
-   members, and all members are stakeholders, etc.
+   - The following is listed in order of exclusivity, so all inhabitants are
+     members, and all members are stakeholders, etc.
 
 *** The Custodian
-    The custodian will be a singular title whose responsibilities will be the
-    overall upkeep, maintenance, and ordiliness of the house. He will generally
-    be an inhabitant, may or may not be required. He has elevated privledges to
-    to brind in or banish inhabitants. He can also spend money and/or shares on
-    behalf of the house. He will be chosen by a vote of the stakeholders. A
-    similar vote is required to replace him.
+    - The custodian will be a title whose responsibilities will be the upkeep,
+      maintenance, and ordiliness of the house.
+    - They will generally be an inhabitant, may or may not be required.
+    - They have elevated privledges to bring in or banish inhabitants. They can
+      also spend money and/or shares on behalf of the house with lesser
+      oversight. 
+    - They will be chosen by a vote of the stakeholders. A similar vote is
+      required to replace them. 
+    - Only excpetion is that during Home initiation, the contract creator will a
+      Custodian by default
 
-    His position will give him some incentives.
-    Possible incentives:
-    - priority in buying/selling shares.
-    - discount in buying shares up to a certain amount
-    - monthly stipend of shares
-    - monthly salary
+    - There must always be at least one custodian per house.
+
+    - His position will give him some incentives.
+      Possible incentives:
+      * priority in buying/selling shares.
+      * discount in buying shares up to a certain amount
+      * monthly stipend of shares
+      * monthly salary
+	
 *** Inhabitants
-    The inhabitants will be members currently living in the Home. living in
-    the Home means that they are required pay Rent. The benefit is that they
-    receive a multiplier to their voting power, 10x or so. This means that during
-    votes, each share of an inhabitants' will given them 10x more voting power
-    than a stakeholder's share.
+    - The inhabitants will be members currently living in the Home. living in
+      the Home means that they are required pay for the continuing existence of
+      the house. 
+    - The benefit is that they receive a multiplier to their voting power, 10x
+      or so. This means that during votes, each share of an inhabitants' will
+      give them 10x more voting power than a stakeholder's share.
    
-    Someone cannot become an inhabitant until they become a stakeholder. How I
-    would imagine the onboarding of a new inhabitant/stakeholder would go is that
-    they buy a small amount of shares before moving in and that fee would be
-    paid as a sort of security deposit. 
 *** Members
-    Stakeholders who have the ability to vote and purchase more shares
+    - Stakeholders who have the ability to vote and purchase more shares
 *** Shareholder
-    Shareholders are simply anyone who owns any shares in the Home. 
+    - Shareholders are simply anyone who owns any shares in the Home. 
 
-    Simply being a shareholder does not give you the ability to buy more shares
-    or vote
+    - Simply being a shareholder does not give you the ability to buy more shares
+      or vote
    
 ** Shares, Buying, Selling
    - Upon Home creation, a fixed amount of shares will be generated and distributed
@@ -66,7 +72,7 @@ placeholder.
      stakeholders to buy and sell shares amongst each other.
 
    - Any shareholder can put their shares up for sale at any time. They will be
-     sold as an auction.
+     sold at the currently established price
 
    - Once shares are put up, there will be a period in which only inhabitants can
      buy those shares, a week or so. 
@@ -81,8 +87,8 @@ placeholder.
    - Currently I think the only path to becoming a member should be to live in the
      Home for some period of time
      
-   - This is to try and keep the majority of shareholders invested in the long term health of
-     the house, foster a community, and prevent speculation.
+     * This is to try and keep the majority of shareholders invested in the long term health of
+       the house, foster a community, and prevent speculation.
   
    - Shareholders can also pass their shares on to other shareholders free of charge,
      if they so wish
@@ -98,16 +104,22 @@ placeholder.
    will be rampant. 
    
 
-   + This is my current solution: Bellweather Auctions
-     At regular intervals a small number of shares will be put on the market for
-     anyone to buy, shareholder or no. They will be sold as an auction, with the
-     shares going to whomever is willing to pay the most. The purpose of the
-     shares will be price discovery. The average of the final price for these
-     shares will be used to price the house and individual shares. These shares
-     will come with a gurantee to not be forcibly sold for some time period, 5
-     years?. After this time these shares will be first in line to be bought by
-     the current tenants of the house if no one voluntarily sells. 
+*** Bellweather Auctions
+    - Current best solution for valuation
+    - At regular intervals a small number of shares will be put on the market for
+     anyone to buy, shareholder or no. 
+    - They will be sold as an auction, with the shares going to whomever is
+      willing to pay the most.
+    - The shares sold with this mechanism will be publicly tradable and guranted
+      to not be forcibly sold for some time period, 5 years?.
 
+    - After this time these shares will be first in line to be bought by the
+      current tenants of the house if no one voluntarily sells.
+
+
+    - The purpose of these auctions will be price discovery. The average of the
+      final price for these shares will be used to price the house and
+      individual shares. 
   
 ***  alternative solutions
 
@@ -117,6 +129,10 @@ placeholder.
 	 putting our complete trust in whoever owns this address. This is not a
 	 good solution but allows us to design the system around the problem,
 	 allowing it to be more fully solved at a later date.
+
+	 * The address we give this trust to will likely be either an Oracle or
+         a prediction market
+	 
       2. Allow the price to be determined by the market of current
          members. Instead of buying/selling shares at market price, allow people
          the option of putting their shares up for auction. valuation will be
@@ -127,7 +143,7 @@ placeholder.
 
 
 
-** Rent
+** "Rent"
    - The Inhabitants of a Home are responsible for paying the cost of a Home's
      continuing existence. This could include property taxes, maintenance,
      mortage, custodian salary, etc. 
@@ -142,43 +158,93 @@ placeholder.
 
    - These shares will be purchased from one of the following sources, in order of
      priority:
+
      1. shares currently for sell on the marketplace
      2. shares owned by the stakeholder for whom the greatest amount of time has
 	past since they received the shares.
      3. shares owned by the member for whom the greatest amount of time has past
 	since they lived in the house
+
+	* The implication of the above is that shares may be forcibly sold
    
-   The min number could potentially be 0 but I think it should be greater, to
-   ensure that all inhabitants are at least partially invested in the long term
-   health of the house and to prevent a situation where those with large shares
-   refuse to sell until the housing price goes up, turning the relation into
-   much more of a landlord, renter dicotomy,
+   - The min number could potentially be 0 but I think it should be greater, to
+     ensure that all inhabitants are at least partially invested in the long
+     term health of the house and to prevent a situation where those with large
+     shares refuse to sell until the housing price goes up, turning the relation
+     into much more of a landlord, renter dicotomy,
 
    
 ** maintenance
-   A monthly amount will be agreed upon, through a vote, to pay in maintenance
-   fees each month. This amount will be stored by the Home for future
-   repairs. This is significant because it is the largest source of Ether that
-   the Home will need to store for a large period of time. 
+   - A monthly amount will be agreed upon, through a vote, to pay in maintenance
+     fees each month. This amount will be stored by the Home for future
+     repairs. This is significant because it is the largest source of Ether that
+     the Home will need to store for a large period of time.
   
-   A max amount may also be set so that if the specified amount is accumulated,
-   a monthly maintenance fee will not be required until the fund has been
-   depleted below the max amount
+   - A max amount may also be set so that if the specified amount is accumulated,
+     a monthly maintenance fee will not be required until the fund has been
+     depleted below the max amount
 
-   If there comes a time more maintenance is needed than is in the fund, then all
-   members will have to give away some amount of shares that will then be given
-   to whomever needs to be paid to perform the maintenance. This person will now
-   be a stakeholder until all their shares are bought
+   - If there comes a time when more maintenance is needed than is in the fund,
+     then a funding proposal may be issued to raise money by taking a portion
+     of every members shares and selling it, with the funds going to the Home to
+     pay for the required maintenace.
+
   
   
-   The custodian will be responsible for issuing contracts to perform
-   maintenace. The task should be checked by another member before the contract
-   is completed and there will be a time period in which members can veto the
-   completed contract before funds are released.
-  
-** voting
-   There will be a number of actions that either require a vote to perform or
-   or that can be opposed/reversed with a veto vote within a certain time period
-   of the action.
+** Proposals
+   - There will be a number of actions that require a vote to perform, these
+     will be called proposals
+   - Proposals issed by Custodians will, generally, require a vote to veto the
+     proposals rather than a vote to allow the proposal.
+   - Proposals will often have a time to live, the time window in which members
+     can vote on the proposal before it is decided and acted upon.
+ 
+
 
     
+*** Proposal Types
+
+**** Confirmation 
+     - This proposal must be issued by the contract creator, after all founding
+       members have been added.
+     - It requires every member to assent before it can pass
+     - If the Home contract changes before this proposal passes, the proposal
+       will be decided in the negative and a new confirmation proposal will have
+       to be issued.
+     - Until a confirmation proposal passes only new members can be added, and
+       current members properties tweaked, and only by the creator.
+
+
+**** Change Status
+     - Change the status of an address. Either changing member type or usage
+       percentage.
+     - Requires simple majority to enact
+       * simple majority to veto if proposed by custodian
+
+     - Rules and Caveats
+       + A custodian cannot change member types if they are the only custodian
+       + A member cannot be made a stakeholder
+       + An inhabitant must have a non-zero usage percentage
+       + A member and stakeholder must have a zero usage percentage
+       + A stakeholder cannot be made a member
+       + A custodian cannot be made an stakeholder
+
+       
+
+**** spending proposal
+     - send money owned by Home to address
+
+   
+**** funding proposal
+     - Take certain number of shares from all members, stakeholders, and
+       custodians. 
+     - Share will be put on internal market to be sold.
+     - If buyer cannot be found on internal market, shares will be put on
+       global market, with the same rules and gurantees as found under
+       Bellweather Auctions
+     - funds raised will be given to Home, where it is assumed a new spending
+       proposal will be issued to use funds
+**** change variable
+     - Change some variable. Such as the TTL(time to live) for a proposal, or
+       voting threshold needed to enact a proposal.
+     
