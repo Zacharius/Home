@@ -8,15 +8,13 @@ async function initializeHome(){
     var init_val = web3.utils.toWei('1', 'ether');
     var home_name = 'test home';
 
-    var founder_type = Constants.Member_Type.Custodian;
     var founder_usage = 10;
     var founder_shares = web3.utils.toWei('.5', 'ether');
 
     return await Home.new(home_name,
-				init_val,
-				founder_type,
-				founder_usage,
-				founder_shares);
+			  init_val,
+			  founder_usage,
+			  founder_shares);
 }
 
 async function initHomeWithMembers(addresses, confirmed) {

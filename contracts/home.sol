@@ -35,7 +35,6 @@ contract Home is Home_base, ERC20Interface {
   //create contract
   constructor(string memory _name,
 	      uint val,
-	      Member_Type founder_type,
 	      uint8 founder_usage,
 	      uint founder_shares) public {
     name = _name;		
@@ -43,7 +42,7 @@ contract Home is Home_base, ERC20Interface {
     home_shares = TOTAL_SHARES;//all shares are initially owned by Home
     
     addFoundingMember(msg.sender,
-		      founder_type,
+		      Member_Type.Custodian, //creator will be custodian by default
 		      founder_usage,
 		      founder_shares);
   }
