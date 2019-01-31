@@ -21,19 +21,25 @@ async function initializeHome(){
 
 async function initHomeWithMembers(addresses, confirmed) {
     let home = await initializeHome();
-    addresses.forEach(function(address) {
-	addFoundingMember(home, address);
+    members = addresses.slice(1);
+    members.forEach(async function(addr) {
+	await addFoundingMember(home, addr);
     });
+
+    if(confirmed){
+	await confirmHome(home, addresses);
+    }
+
     return home;
 }
 
 async function confirmHome(home, members){
-    home.issueProposal(Constants.Proposal_Type.Confirmation,
+    await home.issueProposal(Constants.Proposal_Type.Confirmation,
 		       {from: members[0]});
     let propAddr = await home.props.call(0);
     let prop = await Confirmation_prop.at(propAddr);
-    members.forEach(function(member) {
-	prop.castVote(Constants.Vote_Type.For,
+    members.forEach(async function(member) {
+	await prop.castVote(Constants.Vote_Type.For,
 		      {from: member});
     });
 }

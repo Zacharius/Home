@@ -101,7 +101,8 @@ contract('proposals', async function(accounts)  {
 
 	describe('Mid confirmation changes', () => {
 	    before(async function () {
-		Home = await Helper.initHomeWithMembers(accounts);
+		let accts = accounts.slice(0,5);
+		Home = await Helper.initHomeWithMembers(accts, false);
 		await Home.issueProposal(Constants.Proposal_Type.Confirmation,
 					{from: accounts[0]});  
 	       let propAddr = await Home.props.call(0);
