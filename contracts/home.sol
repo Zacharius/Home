@@ -4,6 +4,7 @@ import  "./home_base.sol";
 import "./proposal.sol";
 import "./confirmation_prop.sol";
 import "./erc20.sol";
+import "./offer.sol";
 
 
 contract Home is Home_base, ERC20Interface {
@@ -25,6 +26,8 @@ contract Home is Home_base, ERC20Interface {
   uint public home_shares;
   uint public home_account;
 
+  uint8 public unused;//represent % of home unused, 0-100
+
   modifier isConfirmed {
     require(confirmed,
 	    'contract must be confirmed before action can be taken');
@@ -40,6 +43,7 @@ contract Home is Home_base, ERC20Interface {
     name = _name;		
     total_val = val;
     home_shares = TOTAL_SHARES;//all shares are initially owned by Home
+    unused = 100;
     
     addFoundingMember(msg.sender,
 		      Member_Type.Custodian, //creator will be custodian by default
@@ -54,10 +58,10 @@ contract Home is Home_base, ERC20Interface {
 			     uint founder_shares) public {
     require(founder_shares <= home_shares,
 	    'Not enough shares available');
-    require(founder_usage <= 100,
-	    '% usage must be less than 100');
-    require(confirmed == false,
-	    'It is too late to add a founding member');
+    require(founder_usage <= unused,
+	    'Not enough space');
+    require(!confirmed,
+	    'Cannot add founding member once contract has been confirmed');
     require(!isMember(founder_addr),
 	    'Is alraedy a member');
     
@@ -65,10 +69,35 @@ contract Home is Home_base, ERC20Interface {
     member[founder_addr].mem_type = founder_type;
     member[founder_addr].shares = founder_shares;
     member[founder_addr].usage_percent = founder_usage;
-    member[founder_addr].account = 0;
     emit newMember(founder_addr, founder_type);
 
+    unused -= founder_usage;
     home_shares -= founder_shares;
+  }
+
+  function addMember(address addr,
+		     Member_Type typeOf,
+		     uint8 usage) isConfirmed internal {
+    require(usage <= unused,
+	    'Not enough space!');
+    require(!isMember(addr),
+	    'Is alraedy a member');
+
+    mem_addr.push(addr);
+    member[addr].mem_type = typeOf;
+    member[addr].usage_percent = usage;
+    emit newMember(addr, typeOf);
+
+    unused -= usage;
+
+
+  }
+
+  function addMember(address addr,
+		     Member_Type typeOf) isConfirmed internal {
+    addMember(addr,
+	      typeOf,
+	      0);
   }
 
   
@@ -115,8 +144,29 @@ contract Home is Home_base, ERC20Interface {
   //return current share price, with discount added if applicable too member
   function calcSharePrice(address _member) isConfirmed public returns(uint) {}
 
-  //create offer contract, subtract amount from creator's shares
-  function offerShares(uint _amount)  isConfirmed public {}
+  /*
+  1. create offer contract
+  2. make contract member of same type as issuer
+  3. allow contract to spend issuers funds
+  4. emit sharesOffered event
+  */
+  function offerShares(uint _amount)  isConfirmed public returns (address) {
+    require(member[msg.sender].shares >= _amount,
+	    'You do not own enough shares');
+    
+    Offer offer = new Offer(msg.sender, _amount);
+
+    Member_Type mem_type = member[msg.sender].mem_type;
+    addMember(address(offer), mem_type);
+
+    bool success = approve(address(offer), _amount);
+    assert(success);
+
+    emit sharesOffered(_amount, msg.sender, address(offer));
+
+    return address(offer);
+    
+  }
 
   function isMember(address _member) public view returns (bool){
     bool _isMember = false;
@@ -221,9 +271,8 @@ contract Home is Home_base, ERC20Interface {
 
     allowed[from][to] -= tokens;
     member[msg.sender].shares -= tokens;
-
-    
   }
+
 
 
   
