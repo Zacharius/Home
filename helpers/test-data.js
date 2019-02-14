@@ -56,12 +56,32 @@ async function addFoundingMember(home, address) {
 				founder_shares);
 }
 
+function extractEventItem(transaction,
+			  eventName,
+			  itemName){
+    var event = extractEvent(transaction, eventName);
+    return event[itemName];
+}
 
+function extractEvent(transaction, eventName){
+    var logs = transaction.logs;
+    var event;
+
+    logs.forEach(function(log) {
+	if (log.event === eventName){
+	    event = log.args;
+	    return;
+	}
+    });
+
+    return event;
+}
 
 module.exports = {
     initializeHome,
     addFoundingMember,
     initHomeWithMembers,
-    confirmHome
+    confirmHome,
+    extractEventItem
 };
 
