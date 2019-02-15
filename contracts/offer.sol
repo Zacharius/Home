@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import  "./home_base.sol";
 
 //offer home shares to another
-contract Home_offer is Home_base {
+contract Offer is Home_base {
 
   //shares currently held by contract for sale
   uint public shares_offered;
@@ -11,7 +11,7 @@ contract Home_offer is Home_base {
   //time created, represented as seconds since uinx epoch
   uint public creation_time;
 
-  constructor(address creator,
+  constructor(address issuer,
 	      uint amount) public {}
 
   //allow creator of contract to withdraw shares
