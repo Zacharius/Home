@@ -39,7 +39,6 @@ contract Home_base {
     uint shares;
     Member_Type mem_type;
     uint8 usage_percent;//percent of Home Member is using
-    uint account;//Ether Home is holding for Member
   }
 
   //events
