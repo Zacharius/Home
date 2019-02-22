@@ -16,10 +16,5 @@
    This is the technologies that I'm currently using
 
    + Blockchain Platform :: Ethereum
-   
-
-
-
-
 	+ Smart Contract Language :: Solidity
    + Framework :: Truffle
